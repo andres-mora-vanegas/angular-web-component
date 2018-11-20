@@ -4,16 +4,33 @@
 <head>
   <meta charset="UTF-8">
   <title>Custom Button Test Page</title>
-  <script src="elements.js"></script>
+  <script type="text/javascript" src="dist/angular6-elements/runtime.js"></script>
+  <script type="text/javascript" src="dist/angular6-elements/polyfills.js"></script>
+  <script type="text/javascript" src="dist/angular6-elements/styles.js"></script>
+  <script type="text/javascript" src="dist/angular6-elements/scripts.js"></script>
+  <script type="text/javascript" src="dist/angular6-elements/vendor.js"></script>
+  <script type="text/javascript" src="dist/angular6-elements/main.js"></script>
 </head>
 
 <body>
   <custom-button label="First Value"></custom-button>
+  <custom-modal title="finish" content="datita"></custom-modal>
 
   <script>
     const button = document.querySelector('custom-button');
+    const modal = document.querySelector('custom-modal');
     button.addEventListener('action', (event) => {
       console.log(`"action" emitted: ${event.detail}`);
+    })
+
+    button.addEventListener('click', (event) => {
+      modal.show = true;
+      modal.footer = 'true';
+    })
+
+    modal.addEventListener('action', (event) => {
+      console.log(event);      
+      modal.show = event.detail;
     })
     setTimeout(() => button.label = 'Second Value', 3000);
 
